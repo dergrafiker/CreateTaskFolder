@@ -18,8 +18,6 @@ import java.util.regex.Pattern
 @CompileStatic
 class createTaskFolder {
     public static void main(String[] args) {
-//        runMultipleTestsThenExit()
-
         def foldername = JOptionPane.showInputDialog(new JFrame(), "Please enter a foldername")
         if (StringUtils.isEmpty(foldername))
             System.exit(1)
@@ -102,6 +100,7 @@ class createTaskFolder {
         }
         foldername = recombineWords(foldername)
         foldername = joinWords(date, ticketNumber, foldername)
+        foldername = foldername.replaceAll("\\s+", "")
         foldername = StringUtils.abbreviate(foldername, 255)
         return foldername
     }
