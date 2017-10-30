@@ -1,5 +1,6 @@
 package de.cn.taskmanagement
 
+import groovy.transform.CompileStatic
 import org.apache.commons.lang3.StringUtils
 import org.apache.commons.text.WordUtils
 
@@ -14,6 +15,7 @@ import java.util.regex.Pattern
                 @Grab(group = 'org.apache.commons', module = 'commons-text', version = '1.1')
         ]
 )
+@CompileStatic
 class createTaskFolder {
     public static void main(String[] args) {
 //        runMultipleTestsThenExit()
@@ -28,9 +30,9 @@ class createTaskFolder {
 
     private def static getTicketNumber(String input) {
         String returnValue = "";
-        Matcher rfcMatcher = Pattern.compile("(?i)[a-z]{3,}-\\d+").matcher(input)
-        if (rfcMatcher.find()) {
-            returnValue = rfcMatcher.group()
+        Matcher ticketMatcher = Pattern.compile("(?i)task \\d+").matcher(input)
+        if (ticketMatcher.find()) {
+            returnValue = ticketMatcher.group()
         }
 
         return returnValue
@@ -64,13 +66,23 @@ class createTaskFolder {
 
     private def static clearGermanCharacters(String input) {
         String retVal = input
-        retVal = retVal.replaceAll("Ä", "Ae");
+
+        retVal = StringUtils.replaceEach(retVal,
+                ["Ä", "ä",
+                 "Ö", "ö",
+                 "Ü", "ü",
+                 "ß"] as String[],
+                ["Ae", "ae",
+                 "Oe", "oe",
+                 "Ue", "ue",
+                 "ss"] as String[])
+        /*retVal = retVal.replaceAll("Ä", "Ae");
         retVal = retVal.replaceAll("ä", "ae");
         retVal = retVal.replaceAll("Ö", "Oe");
         retVal = retVal.replaceAll("ö", "oe");
         retVal = retVal.replaceAll("Ü", "Ue");
         retVal = retVal.replaceAll("ü", "ue");
-        retVal = retVal.replaceAll("ß", "ss");
+        retVal = retVal.replaceAll("ß", "ss");*/
         return retVal
     }
 
