@@ -1,16 +1,19 @@
 package de.cn.taskmanagement
 
-import org.apache.commons.lang.StringUtils
-import org.apache.commons.lang.WordUtils
+import org.apache.commons.lang3.StringUtils
+import org.apache.commons.text.WordUtils
 
 import javax.swing.*
 import java.text.SimpleDateFormat
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
-@Grapes([
-        @Grab(group = 'commons-lang', module = 'commons-lang', version = '2.6')
-])
+@Grapes(
+        [
+                @Grab(group = 'org.apache.commons', module = 'commons-lang3', version = '3.6'),
+                @Grab(group = 'org.apache.commons', module = 'commons-text', version = '1.1')
+        ]
+)
 class createTaskFolder {
     public static void main(String[] args) {
 //        runMultipleTestsThenExit()
