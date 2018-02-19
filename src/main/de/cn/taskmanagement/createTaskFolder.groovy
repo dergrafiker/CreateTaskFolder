@@ -28,7 +28,7 @@ class createTaskFolder {
 
     private def static getTicketNumber(String input) {
         String returnValue = "";
-        Matcher ticketMatcher = Pattern.compile("(?i)task \\d+").matcher(input)
+        Matcher ticketMatcher = Pattern.compile("(?i)(task|hpqc).+?\\d+").matcher(input)
         if (ticketMatcher.find()) {
             returnValue = ticketMatcher.group()
         }
