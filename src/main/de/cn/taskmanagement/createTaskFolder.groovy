@@ -30,7 +30,7 @@ class createTaskFolder {
         String returnValue = "";
         Matcher ticketMatcher = Pattern.compile("(?i)(task|hpqc).+?\\d+").matcher(input)
         if (ticketMatcher.find()) {
-            returnValue = ticketMatcher.group()
+            returnValue = ticketMatcher.group().toUpperCase()
         }
 
         return returnValue
