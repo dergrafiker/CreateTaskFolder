@@ -30,7 +30,7 @@ class createTaskFolder {
         String returnValue = "";
         Matcher ticketMatcher = Pattern.compile("(?i)(task|hpqc).+?\\d+").matcher(input)
         if (ticketMatcher.find()) {
-            returnValue = ticketMatcher.group().toUpperCase()
+            returnValue = ticketMatcher.group()
         }
 
         return returnValue
@@ -99,7 +99,7 @@ class createTaskFolder {
             date = new SimpleDateFormat('yyyy-MM-dd').format(new Date())
         }
         foldername = recombineWords(foldername)
-        foldername = joinWords(date, ticketNumber, foldername)
+        foldername = joinWords(date, ticketNumber.toUpperCase(), foldername)
         foldername = foldername.replaceAll("\\s+", "")
         foldername = StringUtils.abbreviate(foldername, 255)
         return foldername
