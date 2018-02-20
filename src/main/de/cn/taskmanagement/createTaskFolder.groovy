@@ -22,7 +22,15 @@ class createTaskFolder {
         if (StringUtils.isEmpty(foldername))
             System.exit(1)
 
-        new File(".", processFoldername(foldername)).mkdir()
+        def cleanedInput = processFoldername(foldername)
+
+        boolean isTestMode = false
+
+        if (isTestMode) {
+            JOptionPane.showMessageDialog(new JFrame(), "folder is " + cleanedInput)
+        } else {
+            new File(".", cleanedInput).mkdir()
+        }
         System.exit(0)
     }
 
@@ -38,7 +46,7 @@ class createTaskFolder {
 
     private def static getDate(String input) {
         Matcher dateMatcher = Pattern.compile("\\d{4}-\\d{2}-\\d{2}").matcher(input)
-        String returnValue = "";
+        String returnValue = ""
         if (dateMatcher.find()) {
             returnValue = dateMatcher.group()
         }
@@ -66,10 +74,10 @@ class createTaskFolder {
         String retVal = input
 
         retVal = StringUtils.replaceEach(retVal,
-                ["Ä", "ä",
-                 "Ö", "ö",
-                 "Ü", "ü",
-                 "ß"] as String[],
+                ["\u00c4", "\u00e4",
+                 "\u00d6", "\u00f6",
+                 "\u00dc", "\u00fc",
+                 "\u00df"] as String[],
                 ["Ae", "ae",
                  "Oe", "oe",
                  "Ue", "ue",
@@ -88,9 +96,9 @@ class createTaskFolder {
         println input + " => " + processFoldername(input)
     }
 
-    private def static String processFoldername(String input) {
+    private static String processFoldername(String input) {
         String foldername = clearGermanCharacters(input)
-        String ticketNumber = getTicketNumber(foldername);
+        String ticketNumber = getTicketNumber(foldername)
         foldername = StringUtils.remove(foldername, ticketNumber)
         String date = getDate(foldername)
         if (StringUtils.isNotEmpty(date)) {
